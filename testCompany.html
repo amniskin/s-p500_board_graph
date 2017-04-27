@@ -38,14 +38,16 @@ var simulation = d3.forceSimulation()
 			.attr("class", "links")
 			.selectAll("line")
 			.data(graph.links)
-			.enter().append("line");
+			.enter().append("line")
+			.attr("stroke-width", function(d) {return d.value/2});
 
 		var node = svg.append("g")
 			.attr("class", "nodes")
 			.selectAll("circle")
 			.data(graph.nodes)
 			.enter().append("circle")
-			.attr("r", 2.5)
+			//.attr("fill", function(d) { if(d.group == 1) {return "pink"} else {return "blue"}})
+			.attr("r", 2)
 			.call(d3.drag()
 					.on("start", dragstarted)
 					.on("drag", dragged)
